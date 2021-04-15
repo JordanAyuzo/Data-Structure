@@ -48,7 +48,7 @@ int peek(Node *top){
 
 void display(Node *top){
     if(is_empty(top))
-        printf("\nLa pila esta vacia, no hay elementos que mostrar");
+        printf("\nLa pila esta vacía, no hay elementos que mostrar");
     else
         do {
             printf("\n%d", top->data);
@@ -58,4 +58,4 @@ void display(Node *top){
 
 int is_empty(Node *top){
     return top == NULL;
-} 
+}

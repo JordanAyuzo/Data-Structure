@@ -1,19 +1,20 @@
-struct pila
-{
-    int size;
+#ifndef STACK_H
+#define STACK_H
+
+typedef struct stack Stack;
+
+struct stack{
     int top;
-    char *array;
+    unsigned capacity;
+    int *array;
 };
 
-typedef struct pila Pila;
-
-int is_top(Pila *a);
-int is_empty(Pila *pil);
-int is_full(Pila *pil);
-int precedence(char car);
-int is_operator(char car);
-void push(Pila* pil, char care);
-char pop(Pila* pil);
-char* postfijo(char* infijo);
-char*  prefijo(char * infijo);
-char * reverse(char array[30]);
+Stack* createStack(unsigned capacity);
+void destroyStack(Stack *stack);
+void push(Stack *stack, int item);
+int pop(Stack *stack);
+int peek(Stack *stack);
+void display(Stack *stack);
+int is_full(Stack *stack);
+int is_empty(Stack *stack);
+#endif

@@ -1,56 +1,54 @@
 #include <stdio.h>
-#include <string.h>
+#include <limits.h>
 #include <stdlib.h>
 #include "stack.h"
-#define ZIZE 80
-void menu();
+
+int menu();
+
 int main(){
-	char *infijo, caracter[ZIZE];
-    int opt=0;
-    do{
-        menu();
-        scanf("%d",&opt);
-        switch (opt)
-        {
-        case 1:
-            system("cls");
-            printf("\n\t\tIngrese la operacion: ");
-	        scanf("%s", caracter);
-	        infijo = caracter;
-            printf("\n\t___________________________________");
-            printf("\n \t              CONVERSION       ");
-            printf("\n\t___________________________________\n");
-	        printf("\tSu Postfijo es : %s", postfijo(infijo));
-            getchar();getchar();
-            break;
-        case 2:
-            system("cls");
-            printf("\n\t\tIngrese la operacion: ");
-	        scanf("%s", caracter);
-	        infijo = caracter;
-            printf("\n\t___________________________________");
-            printf("\n\t               CONVERSION          ");
-            printf("\n\t___________________________________\n");
-	        printf("\n \tSu Prefijo es : %s", prefijo(infijo));
-            getchar();getchar();
-            break;
-        case 3:
-            break;
-        default:
-            break;
-        }
-    }while (opt!=3);
-	 return 0;
+
+    Stack *my_stack = createStack(10);
+    int option, item;
+
+    while(1){
+        option = menu();
+        switch (option){
+        case 1: printf("Ingresar el elemento entero a insertar:");
+                scanf("%d", &item);
+                push(my_stack, item);
+                break;
+        case 2: item = pop(my_stack);
+                if(item != INT_MIN)
+                    printf("Elemento retirado de la pila %d", item);
+                break;
+        case 3: item = peek(my_stack);
+                if(item == INT_MIN)
+                    printf("No hay elementos en la pila");
+                else
+                    printf("ELemento de la cima: %d", item);
+                break;
+        case 4: display(my_stack);
+                break;
+        case 5: destroyStack(my_stack);
+                exit(EXIT_SUCCESS);
+        default:printf("Opción inválida");
+                break;
+        }    
+    }
+
+    return EXIT_SUCCESS;
 }
 
-void menu(){
-    system("cls");
-    printf("\n\t ______________________________\n");
-    printf("\t|     MENU DE OPCIONES         |\n");
-    printf("\t|______________________________|\n");
-    printf("\t| 1)Infijo -> Postfijo         |\n");
-    printf("\t| 2)Infijo -> Prefijo          |\n");
-    printf("\t| 3)Salir                      |\n");
-    printf("\t|______________________________|\n");
-    printf("\t");
+int menu(){
+    int option;
+    printf("\n\n\n*** MENU PILA***\n");
+    printf("\n1. Insertar elemento");
+    printf("\n2. Eliminar elemento");
+    printf("\n3. Mirar elemento de la cima");
+    printf("\n4. Mostrar pila");
+    printf("\n5. Salir");
+    printf("\nIngrear una opción:");
+  
+    scanf("%d", &option);
+    return option;
 }
